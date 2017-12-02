@@ -9,7 +9,7 @@ package MyPackage;
  *
  * @author Tvolex
  */
-public class intg {
+public class Intg {
     
     public boolean isInteger(String s) {
         
