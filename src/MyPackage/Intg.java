@@ -6,11 +6,15 @@
 package MyPackage;
 
 /**
- *
- * @author Tvolex
+ * Клас містить метод, який перевіряє число
+ * @author Alina
  */
 public class Intg {
-    
+    /**
+     * Метод, який перевіряє чи в рядку число
+     * @param s рядок
+     * @return число, якщо введено не число, ловить помилку
+     */
     public boolean isInteger(String s) {
         
         try { 

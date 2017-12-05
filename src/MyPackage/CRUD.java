@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package MyPackage;
 
 import static MyPackage.Main.Elements;
@@ -18,10 +14,16 @@ import java.io.IOException;
 import java.util.Arrays;
 
 /**
- *
+ * Клас, що містить методи для роботи з файлами
  * @author Alina
  */
 public class CRUD {
+    /**
+     * Створює нови файл
+     * @param index змінна містить  індекс елемента     
+     * @param name змінна містить ім*я файлу
+     * @param text змінна містить вміст файлу
+     */
     public void Create (int index, String name ,String text) {
         
         if (Read(index) == null) {
@@ -57,30 +59,38 @@ public class CRUD {
      * @param index це індекс хімічного елементу
      */
     public String Read (int index) {
-                  
+                 
         Object getObj = Elements.get(index);
-                    
+                
         if (getObj == null) 
             return null;
         else 
             return getObj.toString();
     }
-    
+    /* Редагує вміст файла
+    * @param name змінна в якій зберігається імя файлу
+    * @param text змінна в якій вміст файлу
+    */
     public static void Update (String name, String text) {
+       try {
+           String pathToFile = PathToElement.get(name).toString();
         
-        String pathToFile = PathToElement.get(name).toString();
-        
-        Read readFile = new Read(pathToFile);
+            Read readFile = new Read(pathToFile);
 
-        String contain = readFile.parse();
+            String contain = readFile.parse();
 
-        int index = readFile.getIndex();
+            int index = readFile.getIndex();
+
+            writeFile rewrite = new writeFile();
+
+            rewrite.rewriteFile(pathToFile, index, text);
+
+            Main.update();
+       } catch (NullPointerException notExistFile) {
+           System.err.println("Такого файлу не існує");
+       }  
         
-        writeFile rewrite = new writeFile();
         
-        rewrite.rewriteFile(pathToFile, index, text);
-        
-        Main.update();
         
     }
     
@@ -94,19 +104,20 @@ public class CRUD {
         
        }
     }
-    
-    public void Delete () {
+    /**
+     * Видаляє заданий файл
+     * @param name назва файлу, який потрібно видалити
+     */
+    public void Delete (String name) {
         
-        System.out.print("Введіть назву елемента який ви хочете вилучити: ");
+        String Katya = Main.PathToElement.get(name + ".txt").toString();
         
-        String input3 = new Input().get();
+        boolean deleted = new File(Katya).delete();
         
-        if (!input3.isEmpty()){
-            
-            String Katya = Main.PathToElement.get(input3).toString();
-            
-            new File(Katya).delete();
-                        
+        if (deleted) {
+            System.err.println("Елемент " + name + " успішно видалений");
+        } else {
+            System.err.println("Такого елементу не існує");
         }
         
         Main.update();

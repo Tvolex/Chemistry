@@ -7,7 +7,7 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
 /**
- *
+ * Цей клас містить метод, який зчитує вміст файла
  * @author Alina
  */
 public class Read {
@@ -19,7 +19,10 @@ public class Read {
     private String[] nameOfFile;
     
     private String contain;
-    
+    /**
+     * Конструктор з параметром 
+     * @param currentFile з типом File
+     */
     public Read (File currentFile) {
         
         this.currentFile = currentFile;
@@ -28,7 +31,10 @@ public class Read {
         
         contain = nameOfFile[0];
     }
-
+    /**
+     * Конструктор з параметром
+     * @param currentEl з типом String
+     */
     public Read(String currentEl) {
         
         this.currentFile = new File(currentEl);
@@ -37,9 +43,10 @@ public class Read {
         
         contain = nameOfFile[0];
     }
-    
-
-    
+    /**
+     * Зчитує вміст файла
+     * @return вміст, якщо нема - null
+     */
     public String parse() {
         
         if (currentFile.isFile() && currentFile.canRead()) {
@@ -72,9 +79,9 @@ public class Read {
         }
         return null;
     }
-    
-    
-    
+    /**
+     * @return повертає індекс елемента
+     */  
     public int getIndex() {
         return index;
     }
